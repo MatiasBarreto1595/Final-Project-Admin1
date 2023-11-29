@@ -57,8 +57,9 @@
 }
 
 .bg-navbar {
-  background-color: rgba(0, 0, 0) !important;
+  background-color: #386641 !important;
   z-index: 3;
   backdrop-filter: blur(10px) !important;
   height: 5rem;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }

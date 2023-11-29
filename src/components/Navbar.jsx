@@ -3,7 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavbarStyle from "../styles/components/NavBar.module.css";
 
-function NavBar({ setHovered }) {
+function NavBar() {
   const onMouseEnter = () => {
     setHovered(true);
   };
@@ -12,7 +12,11 @@ function NavBar({ setHovered }) {
   };
 
   return (
-    <Navbar sticky="top" className={`py-0 px-5 ${NavbarStyle.bgNavbar} top-0`}>
+    <Navbar
+      sticky="top"
+      className={`py-0 px-5 ${NavbarStyle.bgNavbar} top-0`}
+      style={{ fontFamily: "woolwich-regular" }}
+    >
       <Container fluid className="d-flex">
         <Navbar.Brand href="#">
           <h1
@@ -25,19 +29,15 @@ function NavBar({ setHovered }) {
             Juice Shop
           </h1>
         </Navbar.Brand>
-        <div
-          className={`${NavbarStyle.subnav} ms-auto`}
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
+        <Nav.Link
+          style={{
+            color: "#3a913f",
+            textShadow:
+              "1px 0 #fff, -1px 0 #fff, 0 2px #fff, 0 -2px #fff, 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff",
+          }}
         >
-          <Nav.Link className={NavbarStyle.subnavbtn}>Categories</Nav.Link>
-          <div className={NavbarStyle.subnavContent}>
-            <Nav.Link>Juices</Nav.Link>
-            <Nav.Link>Elixirs</Nav.Link>
-            <Nav.Link>Nut milks &amp; smoothies</Nav.Link>
-            <Nav.Link>Sparkling tonics</Nav.Link>
-          </div>
-        </div>
+          Admin panel
+        </Nav.Link>
       </Container>
     </Navbar>
   );

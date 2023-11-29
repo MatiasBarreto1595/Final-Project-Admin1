@@ -1,19 +1,28 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Product from "./pages/Product";
-import Cart from "./pages/Cart";
-import AboutUs from "./pages/AboutUs";
+import Dashboard from "./pages/Dashboard";
+import Orders from "./pages/Orders";
+import Categories from "./pages/Categories";
+import Reviews from "./pages/Reviews";
+import Users from "./pages/Users";
+import Admins from "./pages/Admins";
+import Products from "./pages/Products";
 
 function App() {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/cart" element={<Cart />} />
-      </Routes>
+      <div>
+        <Routes>
+          <Route path="/dashboard" element={<Dashboard />} />
+          {/* <Route path="/admin" element={<Login />} /> */}
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/categories" element={<Categories />} />
+          <Route path="/reviews" element={<Reviews />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/admins" element={<Admins />} />
+        </Routes>
+      </div>
     </>
   );
 }
