@@ -6,11 +6,9 @@ function Dashboard() {
   return (
     <>
       <Navbar />
-      <div className="row w-100 g-0">
-        <div className="col-2">
-          <Sidebar />
-        </div>
-        <div className="col-10 p-4 ">
+      <div className="w-100 g-0" style={{ backgroundColor: "#f2e8cf" }}>
+        <Sidebar />
+        <div className="main p-4 ">
           <h1 className="m-3">Dashboard</h1>
           <div className="d-flex">
             <div className="m-3">

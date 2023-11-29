@@ -5,12 +5,10 @@ function Orders() {
   return (
     <>
     <Navbar />
-<div className="row w-100 g-0" style={{ backgroundColor: "#f2e8cf" }}>
-  <div className="col-2">
+<div className="w-100 g-0" style={{ backgroundColor: "#f2e8cf" }}>
     <Sidebar />
-  </div>
-  <div className="col-10 p-4">
-  <h1>Users Dashboard</h1>
+  <div className="main p-4">
+  <h1>Orders Dashboard</h1>
     <table className="table table-striped">
       <thead>
         <tr>
