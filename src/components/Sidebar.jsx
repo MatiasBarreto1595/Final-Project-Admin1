@@ -6,7 +6,7 @@ function Sidebar() {
     <>
       <Nav
         className="side-bar"
-        style={{ backgroundColor: "#6a994e" }}
+        style={{ backgroundColor: "#3a913f" }}
       >
         <Nav.Item>
           <Nav.Link className="linkSidebar" href="/dashboard">
