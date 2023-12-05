@@ -4,13 +4,6 @@ import Navbar from "react-bootstrap/Navbar";
 import NavbarStyle from "../styles/components/NavBar.module.css";
 
 function NavBar() {
-  const onMouseEnter = () => {
-    setHovered(true);
-  };
-  const onMouseLeave = () => {
-    setHovered(false);
-  };
-
   return (
     <Navbar
       sticky="top"
@@ -18,7 +11,7 @@ function NavBar() {
       style={{ fontFamily: "woolwich-regular" }}
     >
       <Container fluid className="d-flex">
-        <Navbar.Brand href="#">
+        <Navbar.Brand href="http://localhost:5173/">
           <h1
             style={{
               color: "#3a913f",
