@@ -15,7 +15,7 @@ function Reviews() {
                 <th>ID</th>
                 <th>Rating</th>
                 <th>Content</th>
-                <th>User Id</th>
+                <th>User ID</th>
               </tr>
             </thead>
             <tbody>
