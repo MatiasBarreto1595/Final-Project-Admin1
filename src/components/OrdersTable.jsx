@@ -39,7 +39,7 @@ function OrdersTable() {
   return (
     orders && (
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: 700 }}>
+        <TableContainer sx={{ maxHeight: "67vh" }}>
           <Table aria-label="sticky table">
             <TableHead
               style={{
