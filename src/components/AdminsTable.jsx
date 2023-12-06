@@ -42,8 +42,8 @@ function AdminsTable() {
   return (
     admins && (
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: 750 }}>
-          <Table stickyheader aria-label="sticky table">
+        <TableContainer sx={{ maxHeight: 700 }}>
+          <Table aria-label="sticky table">
             <TableHead
               style={{
                 position: "sticky",

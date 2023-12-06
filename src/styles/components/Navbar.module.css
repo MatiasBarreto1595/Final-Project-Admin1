@@ -57,75 +57,9 @@
 }
 
 .bg-navbar {
-  background-color: #386641 !important;
+  background-color: #140005 !important;
   z-index: 3;
   backdrop-filter: blur(10px) !important;
   height: 5rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
-}
-
-.not-found-video {
-  position: fixed;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(20%);
-}
-
-.title-text {
-  font-family: "woolwich-regular";
-  color: #3a913f;
-  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, 1px 1px #fff,
-    -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
-  font-size: 10rem;
-  height: 100%;
-}
-
-.ooops {
-  font-size: 150%;
-  font-family: "woolwich-regular";
-  color: #3a913f;
-  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, 1px 1px #fff,
-    -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
-}
-
-.message-not-found {
-  font-size: 150%;
-  font-family: "woolwich-regular";
-  color: #fbaa03;
-  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, 1px 1px #fff,
-    -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
-}
-
-.bg-obale {
-  background-image: url("/NotFoundImgObalShadow.png");
-  background-repeat: no-repeat;
-  background-size: 22rem 20%;
-  background-position: bottom;
-  background-position-y: 90%;
-}
-
-.back-btn {
-  border: 2px solid #3a913f;
-  background-color: #3a913f;
-  border-radius: 0.9em;
-  padding: 0.4em 1.2em 0.4em 1em;
-  transition: all ease-in-out 0.2s;
-  font-size: 16px;
-}
-
-.back-btn span {
-  font-family: "woolwich-regular";
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #3a913f;
-  font-size: 150%;
-  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, 1px 1px #fff,
-    -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
-}
-
-.back-btn:hover {
-  background-color: #fbaa03;
 }

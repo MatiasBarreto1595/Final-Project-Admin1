@@ -10,9 +10,10 @@ function Products() {
   return admin ? (
     <>
       <Navbar />
-      <div className="w-100 g-1" style={{ backgroundColor: "#f2e8cf" }}>
+      <div className="w-100 g-1 back-dashboard">
         <Sidebar />
         <div className="main p-3">
+          <h1 className="title-dashboard">Products</h1>
           <ProductsTable />
         </div>
       </div>

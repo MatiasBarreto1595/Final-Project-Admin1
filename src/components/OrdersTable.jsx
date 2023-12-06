@@ -30,7 +30,6 @@ function OrdersTable() {
       url: `${import.meta.env.VITE_URL_BASE_API}/order`,
     });
     setOrders(response.data);
-    console.log(response.data);
   };
 
   useEffect(() => {
@@ -40,8 +39,8 @@ function OrdersTable() {
   return (
     orders && (
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: 750 }}>
-          <Table stickyHeader aria-label="sticky table">
+        <TableContainer sx={{ maxHeight: 700 }}>
+          <Table aria-label="sticky table">
             <TableHead
               style={{
                 position: "sticky",

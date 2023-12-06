@@ -33,7 +33,6 @@ function UsersTable() {
       },
     });
     setUsers(response.data);
-    console.log(users);
   };
 
   useEffect(() => {
@@ -43,8 +42,8 @@ function UsersTable() {
   return (
     users && (
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: 750 }}>
-          <Table stickyHeader aria-label="sticky table">
+        <TableContainer sx={{ maxHeight: 700 }}>
+          <Table aria-label="sticky table">
             <TableHead
               style={{
                 position: "sticky",

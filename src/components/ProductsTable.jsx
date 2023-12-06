@@ -30,7 +30,6 @@ function ProductsTable() {
       url: `${import.meta.env.VITE_URL_BASE_API}/product`,
     });
     setProducts(response.data);
-    console.log(response.data);
   };
 
   useEffect(() => {
@@ -40,7 +39,7 @@ function ProductsTable() {
   return (
     products && (
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: 750 }}>
+        <TableContainer sx={{ maxHeight: 700 }}>
           <Table aria-label="sticky table">
             <TableHead
               style={{

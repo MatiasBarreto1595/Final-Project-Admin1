@@ -5,7 +5,7 @@ function Sidebar() {
   const navigate = useNavigate();
   return (
     <>
-      <Nav className="side-bar" style={{ backgroundColor: "#3a913f" }}>
+      <Nav className="side-bar" style={{ backgroundColor: "#464033" }}>
         <Nav.Item>
           <Nav.Link className="linkSidebar" onClick={() => navigate("/")}>
             Dashboard
