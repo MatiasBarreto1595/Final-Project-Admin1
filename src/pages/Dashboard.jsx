@@ -1,14 +1,18 @@
-import React from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { Card } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import NotLoguedIn from "./NotLoguedIn";
+
 function Dashboard() {
-  return (
+  const admin = useSelector((state) => state.admin);
+
+  return admin ? (
     <>
       <Navbar />
       <div className="w-100 g-0" style={{ backgroundColor: "#f2e8cf" }}>
         <Sidebar />
-        <div className="main p-4 ">
+        <div className="main p-3">
           <h1 className="m-3">Dashboard</h1>
           <div className="d-flex">
             <div className="m-3">
@@ -55,6 +59,8 @@ function Dashboard() {
         </div>
       </div>
     </>
+  ) : (
+    <NotLoguedIn />
   );
 }
 

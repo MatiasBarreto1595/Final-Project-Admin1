@@ -7,14 +7,15 @@ import Reviews from "./pages/Reviews";
 import Users from "./pages/Users";
 import Admins from "./pages/Admins";
 import Products from "./pages/Products";
+import Login from "./pages/Login";
 
 function App() {
   return (
     <>
       <div>
         <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
-          {/* <Route path="/admin" element={<Login />} /> */}
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/reviews" element={<Reviews />} />

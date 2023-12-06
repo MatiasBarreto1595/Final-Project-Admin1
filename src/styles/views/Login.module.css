@@ -1,67 +1,66 @@
-.subnav {
-  float: left;
-  overflow: hidden;
+.register {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 30rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to bottom right, #3a913f, #fbaa03);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 10px 30px 15px -3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 5rem;
+  transition: all ease-in-out 0.5s;
 }
 
-/* Subnav button */
-.subnav .subnavbtn {
-  border: none;
-  outline: none;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-  text-decoration: none;
-  color: white;
-  height: 100%;
+.register-btn {
+  border: 2px solid #317a35;
+  background-color: #3a913f;
+  border-radius: 0.9em;
+  padding: 0.4em 1.2em 0.4em 1em;
+  transition: all ease-in-out 0.5s;
+  font-size: 16px;
 }
 
-.subnavContent {
+.register-btn span {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 3rem;
-  left: 0;
-  visibility: hidden;
+  color: white;
+  font-size: 150%;
+}
+
+.register-btn:hover {
+  background-image: linear-gradient(#3a913f, #9b6700);
+}
+
+.title {
+  margin-top: 3rem;
+  text-align: center;
+  cursor: pointer;
+  font-family: "woolwich-regular";
+  font-size: 5rem;
+  color: #3a913f;
+  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, 1px 1px #fff,
+    -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+}
+
+.back-arrow {
   position: absolute;
-  background-color: rgba(255, 255, 255, 0.8) !important;
-  backdrop-filter: blur(10px) !important;
-  width: 100%;
-  z-index: 1;
-  height: 0;
-  transition: all 0.2s ease-out;
-  opacity: 0;
-  top: 100%;
+  z-index: 2;
+  top: 2rem;
+  left: 2rem;
+  cursor: pointer;
 }
 
-/* Style the subnav links */
-.subnavContent a {
-  text-decoration: none;
-  padding: 5px 10px 5px 10px;
-  transition: all 0.3s ease;
-  color: black;
+.back-arrow:hover svg {
+  fill: #3a913f;
 }
 
-/* Add a grey background color on hover */
-.subnavContent a:hover {
-  background-color: #000000;
-  color: rgb(255, 255, 255);
-}
-
-/* When you move the mouse over the subnav container, open the subnav content */
-.subnav:hover .subnavContent {
-  opacity: 1;
-  height: 4rem;
-  visibility: visible;
-  top: 100%;
-}
-
-.bg-navbar {
-  background-color: #386641 !important;
-  z-index: 3;
-  backdrop-filter: blur(10px) !important;
-  height: 5rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+@media (max-width: 576px) {
+  .register {
+    width: 23rem;
+  }
 }
 
 .not-found-video {

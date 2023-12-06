@@ -1,45 +1,52 @@
-import React from "react";
 import { Nav } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
+  const navigate = useNavigate();
   return (
     <>
-      <Nav
-        className="side-bar"
-        style={{ backgroundColor: "#3a913f" }}
-      >
+      <Nav className="side-bar" style={{ backgroundColor: "#3a913f" }}>
         <Nav.Item>
-          <Nav.Link className="linkSidebar" href="/dashboard">
+          <Nav.Link className="linkSidebar" onClick={() => navigate("/")}>
             Dashboard
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link className="linkSidebar" href="/categories">
+          <Nav.Link
+            className="linkSidebar"
+            onClick={() => navigate("/categories")}
+          >
             Categories
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link className="linkSidebar" href="/orders">
+          <Nav.Link className="linkSidebar" onClick={() => navigate("/orders")}>
             Orders
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link className="linkSidebar" href="/reviews">
+          <Nav.Link
+            className="linkSidebar"
+            onClick={() => navigate("/reviews")}
+          >
             Reviews
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link className="linkSidebar" href="/products">
+          <Nav.Link
+            className="linkSidebar"
+            onClick={() => navigate("/products")}
+          >
             Products
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link className="linkSidebar" href="/users">
+          <Nav.Link className="linkSidebar" onClick={() => navigate("/users")}>
             Users
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link className="linkSidebar" href="/admins">
+          <Nav.Link className="linkSidebar" onClick={() => navigate("/admins")}>
             Admins
           </Nav.Link>
         </Nav.Item>

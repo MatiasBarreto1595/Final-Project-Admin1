@@ -1,0 +1,9 @@
+.head1 {
+  z-index: 3;
+  position: sticky;
+  top: "0px";
+}
+
+.rotatedContent1 {
+  transform: rotate(270deg);
+}

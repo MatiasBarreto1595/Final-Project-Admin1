@@ -34,3 +34,20 @@ body {
 .main {
   margin-left: 15rem;
 }
+
+.tables-headers th {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.add-comma span::after {
+  content: ",\00a0";
+}
+
+.add-comma span:nth-last-child(-n + 1)::after {
+  content: ".";
+}
+
+.add-comma span:nth-last-child(2)::after {
+  content: " and ";
+}
