@@ -59,6 +59,7 @@ export default function CategoriesTable() {
                 <TableCell>Name</TableCell>
                 <TableCell>Products</TableCell>
                 <TableCell>Image</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

@@ -61,6 +61,7 @@ function ProductsTable() {
                 <TableCell>Category</TableCell>
                 <TableCell>Best seller</TableCell>
                 <TableCell>Slug</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

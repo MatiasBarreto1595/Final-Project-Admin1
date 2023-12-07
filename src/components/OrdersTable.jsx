@@ -55,6 +55,7 @@ function OrdersTable() {
                 <TableCell>Buyer</TableCell>
                 <TableCell>Items</TableCell>
                 <TableCell>Status</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
