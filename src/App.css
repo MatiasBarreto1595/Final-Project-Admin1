@@ -58,3 +58,35 @@ body {
 .add-comma span:nth-last-child(2)::after {
   content: " and ";
 }
+
+.action-btn-edit {
+  border: 2px solid black;
+  border-radius: 8px;
+  background-color: #7e7c73;
+}
+
+.action-btn-edit:hover {
+  background-color: #97958a;
+}
+
+.action-btn-delete {
+  border-radius: 8px;
+  border: 2px solid black;
+  border-radius: 8px;
+  background-color: #7e7c73;
+}
+
+.action-btn-delete:hover {
+  background-color: #97958a;
+}
+
+.edit-image img:hover {
+  filter: brightness(60%);
+}
+
+.edit-image svg {
+  visibility: hidden;
+}
+.edit-image:hover svg {
+  visibility: visible;
+}

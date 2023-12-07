@@ -9,8 +9,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import { useSelector } from "react-redux";
+import DeleteButton from "./DeleteButton";
 
 function UsersTable() {
+  const myAdmin = useSelector((state) => state.admin);
+  const [refresh, setRefresh] = useState(false);
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -29,7 +34,7 @@ function UsersTable() {
       method: "get",
       url: `${import.meta.env.VITE_URL_BASE_API}/buyer`,
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTZlNTc4ZGM2ZDIxOThjZDJhNjA0M2QiLCJpYXQiOjE3MDE4NzQ5MDJ9.bCUS3aDtMgDkfaBvNBxRUULae0OH7U7JuXbp0qLKmt0`,
+        Authorization: `Bearer ${myAdmin.token}`,
       },
     });
     setUsers(response.data);
@@ -37,7 +42,7 @@ function UsersTable() {
 
   useEffect(() => {
     getUsers();
-  }, []);
+  }, [refresh]);
 
   return (
     users && (
@@ -59,6 +64,7 @@ function UsersTable() {
                 <TableCell>Direction</TableCell>
                 <TableCell>Phone</TableCell>
                 <TableCell>Orders</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -101,6 +107,16 @@ function UsersTable() {
                         {user.orders.map((order) => (
                           <span key={order._id}>{order._id}</span>
                         ))}
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="d-flex flex-column align-items-start ps-4 gap-1">
+                        <DeleteButton
+                          what="buyer"
+                          id={user._id}
+                          setRefresh={setRefresh}
+                          refresh={refresh}
+                        />
                       </div>
                     </TableCell>
                   </TableRow>

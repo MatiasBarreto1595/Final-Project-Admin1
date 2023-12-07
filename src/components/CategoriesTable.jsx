@@ -8,8 +8,14 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import axios from "axios";
+import DeleteButton from "./DeleteButton";
+import CategoriesEditModal from "./CategoriesEditModal";
+import { useDispatch } from "react-redux";
+import { addCategories } from "../redux/categorySlice";
 
 export default function CategoriesTable() {
+  const dispatch = useDispatch();
+  const [refresh, setRefresh] = React.useState(false);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -28,12 +34,13 @@ export default function CategoriesTable() {
       method: "get",
       url: `${import.meta.env.VITE_URL_BASE_API}/category`,
     });
+    dispatch(addCategories(response.data));
     setCategories(response.data);
   };
 
   React.useEffect(() => {
     getCategories();
-  }, []);
+  }, [refresh]);
 
   return (
     categories && (
@@ -91,6 +98,21 @@ export default function CategoriesTable() {
                             category.image
                           }`}
                           alt=""
+                        />
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="d-flex flex-column align-items-start ps-4 gap-1">
+                        <CategoriesEditModal
+                          setRefresh={setRefresh}
+                          refresh={refresh}
+                          category={category}
+                        />
+                        <DeleteButton
+                          what="category"
+                          id={category._id}
+                          setRefresh={setRefresh}
+                          refresh={refresh}
                         />
                       </div>
                     </TableCell>

@@ -9,8 +9,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import { useSelector } from "react-redux";
+import DeleteButton from "./DeleteButton";
+import AdminEditModal from "./AdminEditModal";
 
 function AdminsTable() {
+  const myAdmin = useSelector((state) => state.admin);
+  const [refresh, setRefresh] = useState(false);
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -29,7 +35,7 @@ function AdminsTable() {
       method: "get",
       url: `${import.meta.env.VITE_URL_BASE_API}/admin`,
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTZlNTc4ZGM2ZDIxOThjZDJhNjA0M2QiLCJpYXQiOjE3MDE4NzQ5MDJ9.bCUS3aDtMgDkfaBvNBxRUULae0OH7U7JuXbp0qLKmt0`,
+        Authorization: `Bearer ${myAdmin.token}`,
       },
     });
     setAdmins(response.data);
@@ -37,7 +43,7 @@ function AdminsTable() {
 
   useEffect(() => {
     getAdmins();
-  }, []);
+  }, [refresh]);
 
   return (
     admins && (
@@ -56,6 +62,7 @@ function AdminsTable() {
                 <TableCell>First name</TableCell>
                 <TableCell>Last name</TableCell>
                 <TableCell>Email</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -81,6 +88,21 @@ function AdminsTable() {
                     <TableCell>
                       <div className="d-flex align-items-center">
                         {admin.email}
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="d-flex flex-column align-items-start ps-4 gap-1">
+                        <AdminEditModal
+                          setRefresh={setRefresh}
+                          refresh={refresh}
+                          admin={admin}
+                        />
+                        <DeleteButton
+                          what="admin"
+                          id={admin._id}
+                          setRefresh={setRefresh}
+                          refresh={refresh}
+                        />
                       </div>
                     </TableCell>
                   </TableRow>

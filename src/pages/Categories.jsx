@@ -3,9 +3,12 @@ import Sidebar from "../components/Sidebar";
 import CategoriesTable from "../components/CategoriesTable";
 import { useSelector } from "react-redux";
 import NotLoguedIn from "./NotLoguedIn";
+import CategoryCreateModal from "../components/CategoryCreateModal";
+import { useState } from "react";
 
 function Categories() {
   const admin = useSelector((state) => state.admin);
+  const [refresh, setRefresh] = useState(false);
 
   return admin ? (
     <>
@@ -13,7 +16,10 @@ function Categories() {
       <div className="w-100 g-0 back-dashboard">
         <Sidebar />
         <div className="main p-3">
-          <h1 className="title-dashboard">Categories</h1>
+          <div className="d-flex gap-4">
+            <h1 className="title-dashboard">Categories</h1>
+            <CategoryCreateModal refresh={refresh} setRefresh={setRefresh} />
+          </div>
           <CategoriesTable />
         </div>
       </div>

@@ -9,8 +9,10 @@ import TableRow from "@mui/material/TableRow";
 import * as React from "react";
 import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
+import DeleteButton from "./DeleteButton";
 
 function OrdersTable() {
+  const [refresh, setRefresh] = useState(false);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -34,7 +36,7 @@ function OrdersTable() {
 
   useEffect(() => {
     getOrders();
-  }, []);
+  }, [refresh]);
 
   return (
     orders && (
@@ -84,6 +86,16 @@ function OrdersTable() {
                     <TableCell>
                       <div className="d-flex align-items-center">
                         <p>{order.state}</p>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="d-flex flex-column align-items-start ps-4 gap-1">
+                        <DeleteButton
+                          what="order"
+                          id={order._id}
+                          setRefresh={setRefresh}
+                          refresh={refresh}
+                        />
                       </div>
                     </TableCell>
                   </TableRow>

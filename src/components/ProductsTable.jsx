@@ -9,8 +9,10 @@ import TableRow from "@mui/material/TableRow";
 import * as React from "react";
 import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
+import DeleteButton from "./DeleteButton";
 
 function ProductsTable() {
+  const [refresh, setRefresh] = useState(false);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -34,7 +36,7 @@ function ProductsTable() {
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [refresh]);
 
   return (
     products && (
@@ -121,6 +123,16 @@ function ProductsTable() {
                     <TableCell>
                       <div className="d-flex align-items-center">
                         {product.slug}
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="d-flex flex-column align-items-start ps-4 gap-1">
+                        <DeleteButton
+                          what="product"
+                          id={product._id}
+                          setRefresh={setRefresh}
+                          refresh={refresh}
+                        />
                       </div>
                     </TableCell>
                   </TableRow>
