@@ -110,7 +110,7 @@ function UsersTable() {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <div className="d-flex flex-column align-items-start ps-4 gap-1">
+                      <div className="d-flex flex-nowrap">
                         <DeleteButton
                           what="buyer"
                           id={user._id}

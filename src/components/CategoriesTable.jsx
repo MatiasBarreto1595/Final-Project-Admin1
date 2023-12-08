@@ -103,7 +103,7 @@ export default function CategoriesTable() {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <div className="d-flex flex-column align-items-start ps-4 gap-1">
+                      <div className="d-flex flex-nowrap">
                         <CategoriesEditModal
                           setRefresh={setRefresh}
                           refresh={refresh}

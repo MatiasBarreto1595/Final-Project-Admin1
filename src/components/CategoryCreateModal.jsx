@@ -24,6 +24,7 @@ function CategoryCreateModal({ setRefresh, refresh }) {
     e.preventDefault();
     formData.append("name", name.value);
     formData.append("image", image);
+    console.log(image);
     await axios({
       method: "post",
       url: `${import.meta.env.VITE_URL_BASE_API}/category/`,

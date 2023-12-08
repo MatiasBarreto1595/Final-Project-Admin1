@@ -8,16 +8,30 @@ import { useSelector } from "react-redux";
 
 function CategoriesEditModal({ category, setRefresh, refresh }) {
   const myAdmin = useSelector((state) => state.admin);
+  const formData = new FormData();
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const [nameInput, setNameInput] = useState(category.name);
-  const [imageSrc, setImageSrc] = useState(category.image);
+  const [imageSrc, setImageSrc] = useState(
+    `${import.meta.env.VITE_URL_BASE_API}/images/${category.image}`
+  );
+
+  const [imageFile, setImageFile] = useState("");
+
+  const handleUploadImageRealTime = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setImageFile(event.target.files[0]);
+      setImageSrc(URL.createObjectURL(event.target.files[0]));
+    }
+  };
 
   const submitEdit = async (e) => {
     e.preventDefault();
+    formData.append("name", nameInput);
+    formData.append("image", imageFile);
     console.log("aaaaaa");
     await axios({
       method: "patch",
@@ -25,10 +39,7 @@ function CategoriesEditModal({ category, setRefresh, refresh }) {
       headers: {
         Authorization: `Bearer ${myAdmin.token}`,
       },
-      data: {
-        name: nameInput && e.target.name.value,
-        image: imageSrc && e.target.files,
-      },
+      data: formData,
     });
     console.log(e.target.files);
     setRefresh(!refresh);
@@ -49,7 +60,7 @@ function CategoriesEditModal({ category, setRefresh, refresh }) {
           encType="multipart/form-data"
         >
           <Modal.Body>
-            <div className="mb-1">
+            <div className="mb-3">
               <label htmlFor="name" className="form-label fs-6">
                 Name:
               </label>
@@ -65,30 +76,28 @@ function CategoriesEditModal({ category, setRefresh, refresh }) {
               <label
                 htmlFor="image-update"
                 className="form-label fs-6 edit-image"
-                style={{ position: "relative", width: "100%" }}
+                style={{ position: "relative", width: "fit-content" }}
               >
                 <FaPenToSquare
+                  className="action-btn-edit"
                   style={{
                     position: "absolute",
-                    zIndex: "10",
-                    top: "3.6rem",
-                    left: "13%",
-                    color: "white",
+                    zIndex: "1",
+                    top: "45%",
+                    left: "45%",
                   }}
                 />
                 <img
                   style={{ height: "8rem" }}
                   className="border rounded"
-                  src={`${
-                    import.meta.env.VITE_URL_BASE_API
-                  }/images/${imageSrc}`}
-                  onChange={(e) => setImageSrc(e.target.value)}
+                  src={`${imageSrc}`}
                 />
               </label>
               <input
                 type="file"
                 id="image-update"
                 style={{ display: "none" }}
+                onChange={(e) => handleUploadImageRealTime(e)}
               />
             </div>
           </Modal.Body>

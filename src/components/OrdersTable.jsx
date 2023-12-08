@@ -10,6 +10,7 @@ import * as React from "react";
 import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
 import DeleteButton from "./DeleteButton";
+import OrderEditModal from "./OrdersEditModal";
 
 function OrdersTable() {
   const [refresh, setRefresh] = useState(false);
@@ -90,7 +91,12 @@ function OrdersTable() {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <div className="d-flex flex-column align-items-start ps-4 gap-1">
+                      <div className="d-flex flex-nowrap">
+                        <OrderEditModal
+                          setRefresh={setRefresh}
+                          refresh={refresh}
+                          order={order}
+                        />
                         <DeleteButton
                           what="order"
                           id={order._id}

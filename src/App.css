@@ -60,24 +60,33 @@ body {
 }
 
 .action-btn-edit {
-  border: 2px solid black;
-  border-radius: 8px;
-  background-color: #7e7c73;
+  border: none;
+  background-color: transparent;
+  color: rgb(0 168 233);
+}
+
+.action-btn-edit svg {
+  width: 1.3rem;
+  height: 1.3rem;
 }
 
 .action-btn-edit:hover {
-  background-color: #97958a;
+  color: rgb(0, 183, 255);
 }
 
 .action-btn-delete {
-  border-radius: 8px;
-  border: 2px solid black;
-  border-radius: 8px;
-  background-color: #7e7c73;
+  border: none;
+  background-color: transparent;
+  color: #cc382e;
+}
+
+.action-btn-delete svg {
+  width: 1.3rem;
+  height: 1.3rem;
 }
 
 .action-btn-delete:hover {
-  background-color: #97958a;
+  color: #e94236;
 }
 
 .edit-image img:hover {
