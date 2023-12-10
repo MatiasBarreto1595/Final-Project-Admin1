@@ -10,6 +10,7 @@ import * as React from "react";
 import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
 import DeleteButton from "./DeleteButton";
+import ProductEditModal from "./ProductEditModal";
 
 function ProductsTable() {
   const [refresh, setRefresh] = useState(false);
@@ -127,7 +128,12 @@ function ProductsTable() {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <div className="d-flex flex-column align-items-start ps-4 gap-1">
+                      <div className="d-flex flex-nowrap">
+                        <ProductEditModal
+                          setRefresh={setRefresh}
+                          refresh={refresh}
+                          product={product}
+                        />
                         <DeleteButton
                           what="product"
                           id={product._id}

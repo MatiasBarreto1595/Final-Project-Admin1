@@ -91,7 +91,7 @@ function AdminsTable() {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <div className="d-flex flex-column align-items-start ps-4 gap-1">
+                      <div className="d-flex flex-nowrap">
                         <AdminEditModal
                           setRefresh={setRefresh}
                           refresh={refresh}
