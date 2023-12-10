@@ -20,6 +20,7 @@ function ProductCreateModal({ setRefresh, refresh }) {
   const price = useInput("");
   const stock = useInput("");
   const [image, setImage] = useState("");
+  const [category, setCategory] = useState("");
 
   const handleFileChange = (event) => {
     setImage(event.target.files[0]);
@@ -28,10 +29,15 @@ function ProductCreateModal({ setRefresh, refresh }) {
   const submitCreate = async (e) => {
     e.preventDefault();
     formData.append("name", name.value);
+    formData.append("description", description.value);
+    formData.append("ingredients", ingredients.value);
+    formData.append("price", price.value);
+    formData.append("stock", stock.value);
     formData.append("image", image);
+    formData.append("category", category);
     await axios({
       method: "post",
-      url: `${import.meta.env.VITE_URL_BASE_API}/category/`,
+      url: `${import.meta.env.VITE_URL_BASE_API}/product/`,
       data: formData,
       headers: {
         Authorization: `Bearer ${myAdmin.token}`,
@@ -123,8 +129,13 @@ function ProductCreateModal({ setRefresh, refresh }) {
               <label htmlFor="category" className="form-label fs-6">
                 Category
               </label>
-              <select className="form-select">
-                <option selected>Select category</option>
+              <select
+                name="category"
+                className="form-select"
+                value={category} 
+                onChange={(e) => setCategory(e.target.value)} 
+              >
+                <option value="">Select category</option>
                 {categories.map((category) => (
                   <option value={category._id} key={category._id}>
                     {category.name}
