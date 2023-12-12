@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(to bottom right, #140005, #fbaa03);
+  background-image: linear-gradient(to bottom right, #140005, #7e7c73);
   padding: 2rem;
   border-radius: 1rem;
   box-shadow: 10px 30px 15px -3px rgba(0, 0, 0, 0.1);
@@ -18,7 +18,7 @@
   background-color: #3a913f;
   border-radius: 0.9em;
   padding: 0.4em 1.2em 0.4em 1em;
-  transition: all ease-in-out 0.5s;
+  transition: all ease-in-out 0.2s;
   font-size: 16px;
 }
 
@@ -31,7 +31,8 @@
 }
 
 .register-btn:hover {
-  background-image: linear-gradient(#3a913f, #9b6700);
+  /* background-image: linear-gradient(#3a913f, #9b6700); */
+  background-color: #44aa49;
 }
 
 .title {

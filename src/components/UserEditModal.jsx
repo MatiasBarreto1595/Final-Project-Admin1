@@ -21,7 +21,7 @@ function UserEditModal({ user, setRefresh, refresh }) {
   const submitEdit = async (e) => {
     e.preventDefault();
     handleClose();
-    const response = await axios({
+    await axios({
       method: "patch",
       url: `${import.meta.env.VITE_URL_BASE_API}/buyer/${user._id}`,
       headers: {
@@ -35,7 +35,6 @@ function UserEditModal({ user, setRefresh, refresh }) {
         phone: e.target.phone.value,
       },
     });
-    console.log(response);
     setRefresh(!refresh);
   };
 

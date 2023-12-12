@@ -33,7 +33,6 @@ function OrdersTable() {
       url: `${import.meta.env.VITE_URL_BASE_API}/order`,
     });
     setOrders(response.data);
-    console.log(response.data);
   };
 
   useEffect(() => {
@@ -58,6 +57,7 @@ function OrdersTable() {
                 <TableCell>Buyer</TableCell>
                 <TableCell>Items</TableCell>
                 <TableCell>Status</TableCell>
+                <TableCell>Total value</TableCell>
                 <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
@@ -90,6 +90,11 @@ function OrdersTable() {
                     <TableCell>
                       <div className="d-flex align-items-center">
                         <p>{order.state}</p>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="d-flex align-items-center">
+                        <p>{order.totalValue}</p>
                       </div>
                     </TableCell>
                     <TableCell>

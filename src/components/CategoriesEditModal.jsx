@@ -32,7 +32,6 @@ function CategoriesEditModal({ category, setRefresh, refresh }) {
     e.preventDefault();
     formData.append("name", nameInput);
     formData.append("image", imageFile);
-    console.log("aaaaaa");
     await axios({
       method: "patch",
       url: `${import.meta.env.VITE_URL_BASE_API}/category/${category._id}`,
@@ -41,7 +40,6 @@ function CategoriesEditModal({ category, setRefresh, refresh }) {
       },
       data: formData,
     });
-    console.log(e.target.files);
     setRefresh(!refresh);
   };
 

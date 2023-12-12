@@ -37,7 +37,6 @@ function ProductsTable() {
 
   useEffect(() => {
     getProducts();
-    console.log("refreshed");
   }, [refresh]);
 
   return (

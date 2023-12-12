@@ -4,6 +4,11 @@
   text-shadow: 2px 0 #000000, -2px 0 #000000, 0 2px #000000, 0 -2px #000000,
     1px 1px #000000, -1px -1px #000000, 1px -1px #000000, -1px 1px #000000;
   transition: all 0.2s ease;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .linkSidebar:hover {
