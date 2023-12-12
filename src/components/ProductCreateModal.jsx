@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useSelector } from "react-redux";
 import useInput from "../hooks/useInput";
+import { FaPlus } from "react-icons/fa6";
 
 function ProductCreateModal({ setRefresh, refresh }) {
   const myAdmin = useSelector((state) => state.admin);
@@ -48,8 +49,8 @@ function ProductCreateModal({ setRefresh, refresh }) {
 
   return (
     <>
-      <button className="btn btn-success" onClick={handleShow}>
-        Create product
+      <button className="btn btn-add me-4" onClick={handleShow}>
+        <FaPlus />
       </button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -132,8 +133,8 @@ function ProductCreateModal({ setRefresh, refresh }) {
               <select
                 name="category"
                 className="form-select"
-                value={category} 
-                onChange={(e) => setCategory(e.target.value)} 
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="">Select category</option>
                 {categories.map((category) => (

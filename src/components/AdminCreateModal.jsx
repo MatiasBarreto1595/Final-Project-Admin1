@@ -3,32 +3,32 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useSelector } from "react-redux";
-import useInput from "../hooks/useInput";
+import { FaPlus } from "react-icons/fa6";
 
 function AdminCreateModal({ setRefresh, refresh }) {
   const myAdmin = useSelector((state) => state.admin);
-  const formData = new FormData();
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const firstname = useInput("");
-  const lastname = useInput("");
-  const email = useInput("");
-  const password = useInput("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const submitCreate = async (e) => {
-    console.log(firstname.value,lastname.value,email.value,password.value);
+    handleClose();
     e.preventDefault();
-    formData.append("firstname", firstname.value);
-    formData.append("lastname", lastname.value);
-    formData.append("email", email.value);
-    formData.append("password", password.value);
     await axios({
       method: "post",
       url: `${import.meta.env.VITE_URL_BASE_API}/admin/`,
-      data: formData,
+      data: {
+        firstname: e.target.firstname.value,
+        lastname: e.target.lastname.value,
+        email: e.target.email.value,
+        password: e.target.password.value,
+      },
       headers: {
         Authorization: `Bearer ${myAdmin.token}`,
       },
@@ -38,8 +38,8 @@ function AdminCreateModal({ setRefresh, refresh }) {
 
   return (
     <>
-      <button className="btn btn-success" onClick={handleShow}>
-        Create admin
+      <button className="btn btn-add me-4" onClick={handleShow}>
+        <FaPlus />
       </button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -55,7 +55,8 @@ function AdminCreateModal({ setRefresh, refresh }) {
                 type="text"
                 className="form-control"
                 id="firstname"
-                {...firstname}
+                value={firstname}
+                onChange={(e) => setFirstname(e.target.value)}
               />
             </div>
             <div className="mb-1">
@@ -66,7 +67,8 @@ function AdminCreateModal({ setRefresh, refresh }) {
                 type="text"
                 className="form-control"
                 id="lastname"
-                {...lastname}
+                value={lastname}
+                onChange={(e) => setLastname(e.target.value)}
               />
             </div>
             <div className="mb-1">
@@ -74,10 +76,11 @@ function AdminCreateModal({ setRefresh, refresh }) {
                 Email
               </label>
               <input
-                type="text"
+                type="email"
                 className="form-control"
                 id="email"
-                {...email}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="mb-1">
@@ -85,10 +88,11 @@ function AdminCreateModal({ setRefresh, refresh }) {
                 Password
               </label>
               <input
-                type="text"
+                type="password"
                 className="form-control"
                 id="password"
-                {...password}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </Modal.Body>
@@ -96,11 +100,7 @@ function AdminCreateModal({ setRefresh, refresh }) {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onClick={handleClose}
-            >
+            <button type="submit" className="btn btn-primary">
               Save changes
             </button>
           </Modal.Footer>

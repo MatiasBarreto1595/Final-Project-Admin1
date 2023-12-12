@@ -16,7 +16,7 @@ function Categories() {
       <div className="w-100 g-0 back-dashboard">
         <Sidebar />
         <div className="main p-3">
-          <div className="d-flex gap-4">
+          <div className="d-flex flex-nowrap justify-content-between align-items-center">
             <h1 className="title-dashboard">Categories</h1>
             <CategoryCreateModal refresh={refresh} setRefresh={setRefresh} />
           </div>

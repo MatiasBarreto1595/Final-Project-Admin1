@@ -16,8 +16,10 @@ function Admins() {
       <div className="w-100 g-0 back-dashboard">
         <Sidebar />
         <div className="main p-3">
-          <h1 className="title-dashboard">Admins</h1>
-          <AdminCreateModal refresh={refresh} setRefresh={setRefresh} />
+          <div className="d-flex flex-nowrap justify-content-between align-items-center">
+            <h1 className="title-dashboard">Admins</h1>
+            <AdminCreateModal refresh={refresh} setRefresh={setRefresh} />
+          </div>
           <AdminsTable />
         </div>
       </div>

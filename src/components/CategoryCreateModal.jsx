@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useSelector } from "react-redux";
 import useInput from "../hooks/useInput";
+import { FaPlus } from "react-icons/fa6";
 
 function CategoryCreateModal({ setRefresh, refresh }) {
   const myAdmin = useSelector((state) => state.admin);
@@ -24,7 +25,6 @@ function CategoryCreateModal({ setRefresh, refresh }) {
     e.preventDefault();
     formData.append("name", name.value);
     formData.append("image", image);
-    console.log(image);
     await axios({
       method: "post",
       url: `${import.meta.env.VITE_URL_BASE_API}/category/`,
@@ -38,8 +38,8 @@ function CategoryCreateModal({ setRefresh, refresh }) {
 
   return (
     <>
-      <button className="btn btn-success" onClick={handleShow}>
-        Create category
+      <button className="btn btn-add me-4" onClick={handleShow}>
+        <FaPlus />
       </button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

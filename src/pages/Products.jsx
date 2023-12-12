@@ -16,8 +16,10 @@ function Products() {
       <div className="w-100 g-1 back-dashboard">
         <Sidebar />
         <div className="main p-3">
-          <h1 className="title-dashboard">Products</h1>
-          <ProductCreateModal refresh={refresh} setRefresh={setRefresh} />
+          <div className="d-flex flex-nowrap justify-content-between align-items-center">
+            <h1 className="title-dashboard">Products</h1>
+            <ProductCreateModal refresh={refresh} setRefresh={setRefresh} />
+          </div>
           <ProductsTable />
         </div>
       </div>

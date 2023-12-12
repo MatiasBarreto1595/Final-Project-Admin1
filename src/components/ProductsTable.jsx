@@ -37,6 +37,7 @@ function ProductsTable() {
 
   useEffect(() => {
     getProducts();
+    console.log("refreshed");
   }, [refresh]);
 
   return (
@@ -92,11 +93,17 @@ function ProductsTable() {
                     </TableCell>
                     <TableCell>
                       <div className="d-flex align-items-center">
-                        {product.image.map((img) => (
+                        {product.image.map((img, index) => (
                           <img
-                            key={img}
+                            key={`${img}_${index}`}
                             style={{ height: "5rem" }}
-                            src={`${img}`}
+                            src={
+                              img.includes("http")
+                                ? `${img}`
+                                : `${
+                                    import.meta.env.VITE_URL_BASE_API
+                                  }/img/${img}`
+                            }
                             alt=""
                           />
                         ))}

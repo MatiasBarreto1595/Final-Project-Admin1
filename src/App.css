@@ -99,3 +99,12 @@ body {
 .edit-image:hover svg {
   visibility: visible;
 }
+
+.btn-add {
+  color: white !important;
+  background-color: #3a913f !important;
+}
+
+.btn-add:hover {
+  background-color: #43a548 !important;
+}

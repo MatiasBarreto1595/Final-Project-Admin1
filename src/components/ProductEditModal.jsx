@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 function ProductEditModal({ product, setRefresh, refresh }) {
   const myAdmin = useSelector((state) => state.admin);
+  const originalImages = product.image;
 
   const [allCategories, setAllCategories] = useState([]);
 
@@ -26,18 +27,12 @@ function ProductEditModal({ product, setRefresh, refresh }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [imageSrc, setImageSrc] = useState(
-    `${import.meta.env.VITE_URL_BASE_API}/images/${product.imagem}`
-  );
-
-  const [imageFile, setImageFile] = useState("");
-
-  const handleUploadImageRealTime = (event) => {
+  const handleUploadImageRealTime = (event, index) => {
     if (event.target.files && event.target.files[0]) {
-      setImageFile(event.target.files[0]);
-      setImageSrc(URL.createObjectURL(event.target.files[0]));
+      document.getElementById(`img_${index}`).src = URL.createObjectURL(
+        event.target.files[0]
+      );
     }
-    console.log(imageSrc.substring(22, imageSrc.length));
   };
 
   const [nameInput, setNameInput] = useState(product.name);
@@ -49,19 +44,19 @@ function ProductEditModal({ product, setRefresh, refresh }) {
   const [bestSellerInput, setBestSellerInput] = useState(
     `${product.bestSeller}`
   );
-  const [slugInput, setSlugInput] = useState(product.slug);
 
   const submitEdit = async (e) => {
     e.preventDefault();
+    handleClose();
+    const formData = new FormData(e.target);
     await axios({
       method: "patch",
       url: `${import.meta.env.VITE_URL_BASE_API}/product/${product._id}`,
       headers: {
         Authorization: `Bearer ${myAdmin.token}`,
+        "Content-Type": "multipart/form-data",
       },
-      data: {
-        state: statusInput && e.target.status.value,
-      },
+      data: formData,
     });
     setRefresh(!refresh);
   };
@@ -75,8 +70,17 @@ function ProductEditModal({ product, setRefresh, refresh }) {
         <Modal.Header closeButton>
           <Modal.Title>Product: {product.name}</Modal.Title>
         </Modal.Header>
-        <form id="edit-form" onSubmit={(e) => submitEdit(e)}>
-          <Modal.Body>
+        <form
+          id="edit-form"
+          onSubmit={(e) => submitEdit(e)}
+          encType="multipart/form-data"
+        >
+          <Modal.Body
+            style={{
+              maxHeight: "calc(100vh - 210px)",
+              overflowY: "auto",
+            }}
+          >
             <div className="mb-3">
               <label htmlFor="name" className="form-label fs-6">
                 Name:
@@ -84,96 +88,112 @@ function ProductEditModal({ product, setRefresh, refresh }) {
               <input
                 type="text"
                 className="form-control"
+                name="name"
                 id="name"
                 value={nameInput}
                 onChange={(e) => setNameInput(e.target.value)}
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="name" className="form-label fs-6">
+              <label htmlFor="description" className="form-label fs-6">
                 Description:
               </label>
               <textarea
+                name="description"
                 type="text"
                 className="form-control"
-                id="name"
+                id="description"
                 value={descriptionInput}
                 onChange={(e) => setDescriptionInput(e.target.value)}
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="name" className="form-label fs-6">
+              <label htmlFor="ingredients" className="form-label fs-6">
                 Ingredients:
               </label>
               <input
+                name="ingredients"
                 type="text"
                 className="form-control"
-                id="name"
+                id="ingredients"
                 value={ingredientsInput}
                 onChange={(e) => setIngredientsInput(e.target.value)}
               />
             </div>
-            <div className="mb-1 d-flex flex-column">
-              <label
-                htmlFor="image-update"
-                className="form-label fs-6 edit-image"
-                style={{ position: "relative", width: "fit-content" }}
-              >
-                <FaPenToSquare
-                  className="action-btn-edit"
-                  style={{
-                    position: "absolute",
-                    zIndex: "1",
-                    top: "45%",
-                    left: "45%",
-                  }}
-                />
-                <img
-                  style={{ height: "8rem" }}
-                  className="border rounded"
-                  src={`${imageSrc}`}
-                />
-              </label>
-              <input
-                type="file"
-                id="image-update"
-                style={{ display: "none" }}
-                onChange={(e) => handleUploadImageRealTime(e)}
-              />
+            <div className="mb-1 d-flex flex-row flex-nowrap gap-2">
+              {originalImages.map((img, index) => (
+                <div key={`${img}_${index}`}>
+                  <label
+                    htmlFor={`image-update_${index}`}
+                    className="form-label fs-6 edit-image"
+                    style={{ position: "relative", width: "fit-content" }}
+                  >
+                    <FaPenToSquare
+                      className="action-btn-edit"
+                      style={{
+                        position: "absolute",
+                        zIndex: "1",
+                        top: "45%",
+                        left: "45%",
+                      }}
+                    />
+                    <img
+                      style={{ height: "8rem" }}
+                      className="border rounded"
+                      src={
+                        img.includes("http")
+                          ? `${img}`
+                          : `${import.meta.env.VITE_URL_BASE_API}/img/${img}`
+                      }
+                      id={`img_${index}`}
+                    />
+                  </label>
+                  <input
+                    name={`img_${index}`}
+                    type="file"
+                    id={`image-update_${index}`}
+                    style={{ display: "none" }}
+                    onChange={(e) => handleUploadImageRealTime(e, index)}
+                  />
+                </div>
+              ))}
             </div>
             <div className="mb-3">
-              <label htmlFor="name" className="form-label fs-6">
+              <label htmlFor="price" className="form-label fs-6">
                 Price:
               </label>
               <input
+                name="price"
                 type="text"
                 className="form-control"
-                id="name"
+                id="price"
                 value={priceInput}
                 onChange={(e) => setPriceInput(e.target.value)}
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="name" className="form-label fs-6">
+              <label htmlFor="stock" className="form-label fs-6">
                 Stock:
               </label>
               <input
+                name="stock"
                 type="text"
                 className="form-control"
-                id="name"
+                id="stock"
                 value={stockInput}
                 onChange={(e) => setStockInput(e.target.value)}
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="categories" className="form-label fs-6">
+              <label htmlFor="category" className="form-label fs-6">
                 Categories:
               </label>
               <select
                 className="form-select"
                 onChange={(e) => setCategoryInput(e.target.value)}
                 name="category"
-                id="categories"
+                id="category"
+                value={categoryInput}
               >
                 {allCategories.map((category) => (
                   <option key={category._id} value={category.name}>
@@ -183,19 +203,19 @@ function ProductEditModal({ product, setRefresh, refresh }) {
               </select>
             </div>
             <div className="mb-3">
-              <label htmlFor="name" className="form-label fs-6">
+              <label htmlFor="bestSeller" className="form-label fs-6">
                 Best seller:
               </label>
               <select
                 className="form-select"
                 onChange={(e) => setBestSellerInput(e.target.value)}
-                name="category"
-                id="categories"
+                name="bestSeller"
+                id="bestSeller"
               >
+                <option value={eval(bestSellerInput)}>{bestSellerInput}</option>
                 <option value={!eval(bestSellerInput)}>
                   {`${!eval(bestSellerInput)}`}
                 </option>
-                <option value={eval(bestSellerInput)}>{bestSellerInput}</option>
               </select>
             </div>
           </Modal.Body>
@@ -203,11 +223,7 @@ function ProductEditModal({ product, setRefresh, refresh }) {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onClick={handleClose}
-            >
+            <button type="submit" className="btn btn-primary">
               Save changes
             </button>
           </Modal.Footer>
