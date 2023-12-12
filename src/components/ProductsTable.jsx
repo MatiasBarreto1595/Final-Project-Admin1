@@ -11,6 +11,7 @@ import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
 import DeleteButton from "./DeleteButton";
 import ProductEditModal from "./ProductEditModal";
+import "ldrs/ring";
 
 function ProductsTable() {
   const [refresh, setRefresh] = useState(false);
@@ -39,132 +40,143 @@ function ProductsTable() {
     getProducts();
   }, [refresh]);
 
-  return (
-    products && (
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: "67vh" }}>
-          <Table aria-label="sticky table">
-            <TableHead
-              style={{
-                position: "sticky",
-                top: 0,
-                boxShadow: "0 4px 2px -2px gray",
-                backgroundColor: "white",
-              }}
-            >
-              <TableRow className="tables-headers">
-                <TableCell>ID</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Description</TableCell>
-                <TableCell>Ingredients</TableCell>
-                <TableCell>Images</TableCell>
-                <TableCell>Price</TableCell>
-                <TableCell>Stock</TableCell>
-                <TableCell>Category</TableCell>
-                <TableCell>Best seller</TableCell>
-                <TableCell>Slug</TableCell>
-                <TableCell>Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {products
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((product) => (
-                  <TableRow key={product._id} hover role="checkbox">
-                    <TableCell>
-                      <div className="d-flex gap-5 align-items-center">
-                        <p>{product._id}</p>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex align-items-center">
-                        <p>{product.name}</p>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex align-items-center">
-                        <p>{`${product.description.substring(0, 100)}...`}</p>
-                      </div>
-                    </TableCell>
-                    <TableCell sx={{ maxWidth: "40rem" }}>
-                      <div className="d-flex align-items-center">
-                        <p>{product.ingredients}</p>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex align-items-center">
-                        {product.image.map((img, index) => (
-                          <img
-                            key={`${img}_${index}`}
-                            style={{ height: "5rem" }}
-                            src={
-                              img.includes("http")
-                                ? `${img}`
-                                : `${
-                                    import.meta.env.VITE_URL_BASE_API
-                                  }/img/${img}`
-                            }
-                            alt=""
-                          />
-                        ))}
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex align-items-center">
-                        {product.price}
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex align-items-center">
-                        {product.stock}
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex align-items-center">
-                        {product.category.name}
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex align-items-center">
-                        {`${product.bestSeller}`}
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex align-items-center">
-                        {product.slug}
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex flex-nowrap">
-                        <ProductEditModal
-                          setRefresh={setRefresh}
-                          refresh={refresh}
-                          product={product}
+  return products ? (
+    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <TableContainer sx={{ maxHeight: "67vh" }}>
+        <Table aria-label="sticky table">
+          <TableHead
+            style={{
+              position: "sticky",
+              top: 0,
+              boxShadow: "0 4px 2px -2px gray",
+              backgroundColor: "white",
+            }}
+          >
+            <TableRow className="tables-headers">
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Description</TableCell>
+              <TableCell>Ingredients</TableCell>
+              <TableCell>Images</TableCell>
+              <TableCell>Price</TableCell>
+              <TableCell>Stock</TableCell>
+              <TableCell>Category</TableCell>
+              <TableCell>Best seller</TableCell>
+              <TableCell>Slug</TableCell>
+              <TableCell>Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {products
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((product) => (
+                <TableRow key={product._id} hover role="checkbox">
+                  <TableCell>
+                    <div className="d-flex gap-5 align-items-center">
+                      <p>{product._id}</p>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex align-items-center">
+                      <p>{product.name}</p>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex align-items-center">
+                      <p>{`${product.description.substring(0, 100)}...`}</p>
+                    </div>
+                  </TableCell>
+                  <TableCell sx={{ maxWidth: "40rem" }}>
+                    <div className="d-flex align-items-center">
+                      <p>{product.ingredients}</p>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex align-items-center">
+                      {product.image.map((img, index) => (
+                        <img
+                          key={`${img}_${index}`}
+                          style={{ height: "5rem" }}
+                          src={
+                            img.includes("http")
+                              ? `${img}`
+                              : `${
+                                  import.meta.env.VITE_URL_BASE_API
+                                }/img/${img}`
+                          }
+                          alt=""
                         />
-                        <DeleteButton
-                          what="product"
-                          id={product._id}
-                          setRefresh={setRefresh}
-                          refresh={refresh}
-                        />
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={products.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    )
+                      ))}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex align-items-center">
+                      {product.price}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex align-items-center">
+                      {product.stock}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex align-items-center">
+                      {product.category.name}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex align-items-center">
+                      {`${product.bestSeller}`}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex align-items-center">
+                      {product.slug}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex flex-nowrap">
+                      <ProductEditModal
+                        setRefresh={setRefresh}
+                        refresh={refresh}
+                        product={product}
+                      />
+                      <DeleteButton
+                        what="product"
+                        id={product._id}
+                        setRefresh={setRefresh}
+                        refresh={refresh}
+                      />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={products.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
+  ) : (
+    <div
+      className="w-100 d-flex justify-content-center align-items-center"
+      style={{ height: "50vh" }}
+    >
+      <l-ring
+        size="80"
+        stroke="3"
+        bg-opacity="0"
+        speed="2"
+        color="white"
+      ></l-ring>
+    </div>
   );
 }
 

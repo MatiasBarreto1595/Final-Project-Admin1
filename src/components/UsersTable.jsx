@@ -12,6 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import { useSelector } from "react-redux";
 import DeleteButton from "./DeleteButton";
 import UserEditModal from "./UserEditModal";
+import "ldrs/ring";
 
 function UsersTable() {
   const myAdmin = useSelector((state) => state.admin);
@@ -45,103 +46,114 @@ function UsersTable() {
     getUsers();
   }, [refresh]);
 
-  return (
-    users && (
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: "67vh" }}>
-          <Table aria-label="sticky table">
-            <TableHead
-              style={{
-                position: "sticky",
-                top: 0,
-                boxShadow: "0 4px 2px -2px gray",
-                backgroundColor: "white",
-              }}
-            >
-              <TableRow className="tables-headers">
-                <TableCell>ID</TableCell>
-                <TableCell>First name</TableCell>
-                <TableCell>Last name</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Address</TableCell>
-                <TableCell>Phone</TableCell>
-                <TableCell>Orders</TableCell>
-                <TableCell>Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {users
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((user) => (
-                  <TableRow key={user._id} hover role="checkbox" tabIndex={-1}>
-                    <TableCell>
-                      <div className="d-flex align-items-center">
-                        <p>{user._id}</p>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex align-items-center">
-                        <p>{user.firstname}</p>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex align-items-center">
-                        <p>{user.lastname}</p>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex align-items-center">
-                        {user.email}
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex align-items-center">
-                        {user.direction}
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex align-items-center">
-                        {user.phone}
-                      </div>
-                    </TableCell>
-                    <TableCell className="add-comma">
-                      <div className="d-flex align-items-center">
-                        {user.orders.map((order) => (
-                          <span key={order._id}>{order._id}</span>
-                        ))}
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex flex-nowrap">
-                        <UserEditModal
-                          setRefresh={setRefresh}
-                          refresh={refresh}
-                          user={user}
-                        />
-                        <DeleteButton
-                          what="buyer"
-                          id={user._id}
-                          setRefresh={setRefresh}
-                          refresh={refresh}
-                        />
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={users.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    )
+  return users ? (
+    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <TableContainer sx={{ maxHeight: "67vh" }}>
+        <Table aria-label="sticky table">
+          <TableHead
+            style={{
+              position: "sticky",
+              top: 0,
+              boxShadow: "0 4px 2px -2px gray",
+              backgroundColor: "white",
+            }}
+          >
+            <TableRow className="tables-headers">
+              <TableCell>ID</TableCell>
+              <TableCell>First name</TableCell>
+              <TableCell>Last name</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Address</TableCell>
+              <TableCell>Phone</TableCell>
+              <TableCell>Orders</TableCell>
+              <TableCell>Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {users
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((user) => (
+                <TableRow key={user._id} hover role="checkbox" tabIndex={-1}>
+                  <TableCell>
+                    <div className="d-flex align-items-center">
+                      <p>{user._id}</p>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex align-items-center">
+                      <p>{user.firstname}</p>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex align-items-center">
+                      <p>{user.lastname}</p>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex align-items-center">
+                      {user.email}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex align-items-center">
+                      {user.direction}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex align-items-center">
+                      {user.phone}
+                    </div>
+                  </TableCell>
+                  <TableCell className="add-comma">
+                    <div className="d-flex align-items-center">
+                      {user.orders.map((order) => (
+                        <span key={order._id}>{order._id}</span>
+                      ))}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex flex-nowrap">
+                      <UserEditModal
+                        setRefresh={setRefresh}
+                        refresh={refresh}
+                        user={user}
+                      />
+                      <DeleteButton
+                        what="buyer"
+                        id={user._id}
+                        setRefresh={setRefresh}
+                        refresh={refresh}
+                      />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={users.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
+  ) : (
+    <div
+      className="w-100 d-flex justify-content-center align-items-center"
+      style={{ height: "50vh" }}
+    >
+      <l-ring
+        size="80"
+        stroke="3"
+        bg-opacity="0"
+        speed="2"
+        color="white"
+      ></l-ring>
+    </div>
   );
 }
 

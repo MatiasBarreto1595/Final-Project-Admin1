@@ -12,6 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import { useSelector } from "react-redux";
 import DeleteButton from "./DeleteButton";
 import AdminEditModal from "./AdminEditModal";
+import "ldrs/ring";
 
 function AdminsTable() {
   const myAdmin = useSelector((state) => state.admin);
@@ -45,83 +46,94 @@ function AdminsTable() {
     getAdmins();
   }, [refresh]);
 
-  return (
-    admins && (
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: "67vh" }}>
-          <Table aria-label="sticky table">
-            <TableHead
-              style={{
-                position: "sticky",
-                top: 0,
-                boxShadow: "0 4px 2px -2px gray",
-                backgroundColor: "white",
-              }}
-            >
-              <TableRow className="tables-headers">
-                <TableCell>ID</TableCell>
-                <TableCell>First name</TableCell>
-                <TableCell>Last name</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {admins
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((admin) => (
-                  <TableRow key={admin._id} hover role="checkbox" tabIndex={-1}>
-                    <TableCell>
-                      <div className="d-flex align-items-center">
-                        <p>{admin._id}</p>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex align-items-center">
-                        <p>{admin.firstname}</p>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex align-items-center">
-                        <p>{admin.lastname}</p>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex align-items-center">
-                        {admin.email}
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex flex-nowrap">
-                        <AdminEditModal
-                          setRefresh={setRefresh}
-                          refresh={refresh}
-                          admin={admin}
-                        />
-                        <DeleteButton
-                          what="admin"
-                          id={admin._id}
-                          setRefresh={setRefresh}
-                          refresh={refresh}
-                        />
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={admins.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    )
+  return admins ? (
+    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <TableContainer sx={{ maxHeight: "67vh" }}>
+        <Table aria-label="sticky table">
+          <TableHead
+            style={{
+              position: "sticky",
+              top: 0,
+              boxShadow: "0 4px 2px -2px gray",
+              backgroundColor: "white",
+            }}
+          >
+            <TableRow className="tables-headers">
+              <TableCell>ID</TableCell>
+              <TableCell>First name</TableCell>
+              <TableCell>Last name</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {admins
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((admin) => (
+                <TableRow key={admin._id} hover role="checkbox" tabIndex={-1}>
+                  <TableCell>
+                    <div className="d-flex align-items-center">
+                      <p>{admin._id}</p>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex align-items-center">
+                      <p>{admin.firstname}</p>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex align-items-center">
+                      <p>{admin.lastname}</p>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex align-items-center">
+                      {admin.email}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex flex-nowrap">
+                      <AdminEditModal
+                        setRefresh={setRefresh}
+                        refresh={refresh}
+                        admin={admin}
+                      />
+                      <DeleteButton
+                        what="admin"
+                        id={admin._id}
+                        setRefresh={setRefresh}
+                        refresh={refresh}
+                      />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={admins.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
+  ) : (
+    <div
+      className="w-100 d-flex justify-content-center align-items-center"
+      style={{ height: "50vh" }}
+    >
+      <l-ring
+        size="80"
+        stroke="3"
+        bg-opacity="0"
+        speed="2"
+        color="white"
+      ></l-ring>
+    </div>
   );
 }
 

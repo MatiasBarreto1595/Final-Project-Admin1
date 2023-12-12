@@ -12,6 +12,7 @@ import DeleteButton from "./DeleteButton";
 import CategoriesEditModal from "./CategoriesEditModal";
 import { useDispatch } from "react-redux";
 import { addCategories } from "../redux/categorySlice";
+import "ldrs/ring";
 
 export default function CategoriesTable() {
   const dispatch = useDispatch();
@@ -42,97 +43,108 @@ export default function CategoriesTable() {
     getCategories();
   }, [refresh]);
 
-  return (
-    categories && (
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: "67vh" }}>
-          <Table aria-label="sticky table">
-            <TableHead
-              style={{
-                position: "sticky",
-                top: 0,
-                boxShadow: "0 4px 2px -2px gray",
-                backgroundColor: "white",
-              }}
-            >
-              <TableRow className="tables-headers">
-                <TableCell>ID</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Products</TableCell>
-                <TableCell>Image</TableCell>
-                <TableCell>Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {categories
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((category) => (
-                  <TableRow
-                    key={category._id}
-                    hover
-                    role="checkbox"
-                    tabIndex={-1}
-                  >
-                    <TableCell>
-                      <div className="d-flex align-items-center">
-                        <p>{category._id}</p>
-                      </div>
-                    </TableCell>
-                    <TableCell align="right">
-                      <div className="d-flex align-items-center">
-                        <p>{category.name}</p>
-                      </div>
-                    </TableCell>
-                    <TableCell sx={{ maxWidth: "15rem" }}>
-                      <div className="d-flex align-items-center">
-                        <p className="add-comma">
-                          {category.products.map((product) => (
-                            <span key={product._id}>{product.name}</span>
-                          ))}
-                        </p>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex align-items-center">
-                        <img
-                          style={{ height: "5rem" }}
-                          src={`${import.meta.env.VITE_URL_BASE_API}/img/${
-                            category.image
-                          }`}
-                          alt=""
-                        />
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="d-flex flex-nowrap">
-                        <CategoriesEditModal
-                          setRefresh={setRefresh}
-                          refresh={refresh}
-                          category={category}
-                        />
-                        <DeleteButton
-                          what="category"
-                          id={category._id}
-                          setRefresh={setRefresh}
-                          refresh={refresh}
-                        />
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={categories.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    )
+  return categories ? (
+    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <TableContainer sx={{ maxHeight: "67vh" }}>
+        <Table aria-label="sticky table">
+          <TableHead
+            style={{
+              position: "sticky",
+              top: 0,
+              boxShadow: "0 4px 2px -2px gray",
+              backgroundColor: "white",
+            }}
+          >
+            <TableRow className="tables-headers">
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Products</TableCell>
+              <TableCell>Image</TableCell>
+              <TableCell>Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {categories
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((category) => (
+                <TableRow
+                  key={category._id}
+                  hover
+                  role="checkbox"
+                  tabIndex={-1}
+                >
+                  <TableCell>
+                    <div className="d-flex align-items-center">
+                      <p>{category._id}</p>
+                    </div>
+                  </TableCell>
+                  <TableCell align="right">
+                    <div className="d-flex align-items-center">
+                      <p>{category.name}</p>
+                    </div>
+                  </TableCell>
+                  <TableCell sx={{ maxWidth: "15rem" }}>
+                    <div className="d-flex align-items-center">
+                      <p className="add-comma">
+                        {category.products.map((product) => (
+                          <span key={product._id}>{product.name}</span>
+                        ))}
+                      </p>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex align-items-center">
+                      <img
+                        style={{ height: "5rem" }}
+                        src={`${import.meta.env.VITE_URL_BASE_API}/img/${
+                          category.image
+                        }`}
+                        alt=""
+                      />
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="d-flex flex-nowrap">
+                      <CategoriesEditModal
+                        setRefresh={setRefresh}
+                        refresh={refresh}
+                        category={category}
+                      />
+                      <DeleteButton
+                        what="category"
+                        id={category._id}
+                        setRefresh={setRefresh}
+                        refresh={refresh}
+                      />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={categories.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
+  ) : (
+    <div
+      className="w-100 d-flex justify-content-center align-items-center"
+      style={{ height: "50vh" }}
+    >
+      <l-ring
+        size="80"
+        stroke="3"
+        bg-opacity="0"
+        speed="2"
+        color="white"
+      ></l-ring>
+    </div>
   );
 }
