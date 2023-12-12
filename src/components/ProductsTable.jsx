@@ -50,6 +50,7 @@ function ProductsTable() {
                 position: "sticky",
                 top: 0,
                 boxShadow: "0 4px 2px -2px gray",
+                backgroundColor: "white",
               }}
             >
               <TableRow className="tables-headers">

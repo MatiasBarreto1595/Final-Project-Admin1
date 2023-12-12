@@ -52,6 +52,7 @@ export default function CategoriesTable() {
                 position: "sticky",
                 top: 0,
                 boxShadow: "0 4px 2px -2px gray",
+                backgroundColor: "white",
               }}
             >
               <TableRow className="tables-headers">
@@ -95,7 +96,7 @@ export default function CategoriesTable() {
                       <div className="d-flex align-items-center">
                         <img
                           style={{ height: "5rem" }}
-                          src={`${import.meta.env.VITE_URL_BASE_API}/images/${
+                          src={`${import.meta.env.VITE_URL_BASE_API}/img/${
                             category.image
                           }`}
                           alt=""

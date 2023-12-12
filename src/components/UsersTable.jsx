@@ -11,6 +11,7 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { useSelector } from "react-redux";
 import DeleteButton from "./DeleteButton";
+import UserEditModal from "./UserEditModal";
 
 function UsersTable() {
   const myAdmin = useSelector((state) => state.admin);
@@ -54,6 +55,7 @@ function UsersTable() {
                 position: "sticky",
                 top: 0,
                 boxShadow: "0 4px 2px -2px gray",
+                backgroundColor: "white",
               }}
             >
               <TableRow className="tables-headers">
@@ -61,7 +63,7 @@ function UsersTable() {
                 <TableCell>First name</TableCell>
                 <TableCell>Last name</TableCell>
                 <TableCell>Email</TableCell>
-                <TableCell>Direction</TableCell>
+                <TableCell>Address</TableCell>
                 <TableCell>Phone</TableCell>
                 <TableCell>Orders</TableCell>
                 <TableCell>Actions</TableCell>
@@ -111,6 +113,11 @@ function UsersTable() {
                     </TableCell>
                     <TableCell>
                       <div className="d-flex flex-nowrap">
+                        <UserEditModal
+                          setRefresh={setRefresh}
+                          refresh={refresh}
+                          user={user}
+                        />
                         <DeleteButton
                           what="buyer"
                           id={user._id}

@@ -33,6 +33,7 @@ function OrdersTable() {
       url: `${import.meta.env.VITE_URL_BASE_API}/order`,
     });
     setOrders(response.data);
+    console.log(response.data);
   };
 
   useEffect(() => {
@@ -49,6 +50,7 @@ function OrdersTable() {
                 position: "sticky",
                 top: 0,
                 boxShadow: "0 4px 2px -2px gray",
+                backgroundColor: "white",
               }}
             >
               <TableRow className="tables-headers">
@@ -80,7 +82,7 @@ function OrdersTable() {
                       <div className="d-flex align-items-center">
                         <p className="add-comma">
                           {order.items.map((item) => (
-                            <span key={item._id}>{item.name}</span>
+                            <span key={item.item._id}>{item.item.name}</span>
                           ))}
                         </p>
                       </div>
