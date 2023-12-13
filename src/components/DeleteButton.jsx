@@ -1,11 +1,15 @@
 import axios from "axios";
 import { FaTrash } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
+import { setRefresh } from "../redux/refresSlice";
 
-function DeleteButton({ what, id, setRefresh, refresh }) {
+function DeleteButton({ what, id }) {
+  const refresh = useSelector((state) => state.refresh);
+  const dispatch = useDispatch();
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -20,7 +24,7 @@ function DeleteButton({ what, id, setRefresh, refresh }) {
         Authorization: `Bearer ${myAdmin.token}`,
       },
     });
-    setRefresh(!refresh);
+    dispatch(setRefresh(!refresh));
     setShow(false);
   };
 

@@ -2,10 +2,13 @@ import axios from "axios";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaPlus } from "react-icons/fa6";
+import { setRefresh } from "../redux/refresSlice";
 
-function AdminCreateModal({ setRefresh, refresh }) {
+function AdminCreateModal() {
+  const dispatch = useDispatch();
+  const refresh = useSelector((state) => state.refresh);
   const myAdmin = useSelector((state) => state.admin);
 
   const [show, setShow] = useState(false);
@@ -33,7 +36,7 @@ function AdminCreateModal({ setRefresh, refresh }) {
         Authorization: `Bearer ${myAdmin.token}`,
       },
     });
-    setRefresh(!refresh);
+    dispatch(setRefresh(!refresh));
   };
 
   return (

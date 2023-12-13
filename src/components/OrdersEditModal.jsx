@@ -3,9 +3,12 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FaPenToSquare } from "react-icons/fa6";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setRefresh } from "../redux/refresSlice";
 
-function OrderEditModal({ order, setRefresh, refresh }) {
+function OrderEditModal({ order }) {
+  const dispatch = useDispatch();
+  const refresh = useSelector((state) => state.refresh);
   const myAdmin = useSelector((state) => state.admin);
 
   const [show, setShow] = useState(false);
@@ -26,7 +29,7 @@ function OrderEditModal({ order, setRefresh, refresh }) {
         state: statusInput && e.target.status.value,
       },
     });
-    setRefresh(!refresh);
+    dispatch(setRefresh(!refresh));
   };
 
   return (
@@ -41,7 +44,8 @@ function OrderEditModal({ order, setRefresh, refresh }) {
         <form id="edit-form" onSubmit={(e) => submitEdit(e)}>
           <Modal.Body>
             <span>
-              Buyer: {order.buyer.firstname} {order.buyer.lastname}{" "}
+              Buyer: {order.buyer ? order.buyer.firstname : "Buyer not found"}
+              {order.buyer && order.buyer.lastname}
             </span>
             <div className="mt-4">
               <select

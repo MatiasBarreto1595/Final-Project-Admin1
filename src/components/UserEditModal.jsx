@@ -3,9 +3,12 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FaPenToSquare } from "react-icons/fa6";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setRefresh } from "../redux/refresSlice";
 
-function UserEditModal({ user, setRefresh, refresh }) {
+function UserEditModal({ user }) {
+  const dispatch = useDispatch();
+  const refresh = useSelector((state) => state.refresh);
   const myAdmin = useSelector((state) => state.admin);
 
   const [show, setShow] = useState(false);
@@ -21,7 +24,7 @@ function UserEditModal({ user, setRefresh, refresh }) {
   const submitEdit = async (e) => {
     e.preventDefault();
     handleClose();
-    await axios({
+    const response = await axios({
       method: "patch",
       url: `${import.meta.env.VITE_URL_BASE_API}/buyer/${user._id}`,
       headers: {
@@ -35,7 +38,8 @@ function UserEditModal({ user, setRefresh, refresh }) {
         phone: e.target.phone.value,
       },
     });
-    setRefresh(!refresh);
+    console.log(response);
+    dispatch(setRefresh(!refresh));
   };
 
   return (

@@ -12,9 +12,12 @@ import TablePagination from "@mui/material/TablePagination";
 import DeleteButton from "./DeleteButton";
 import OrderEditModal from "./OrdersEditModal";
 import "ldrs/ring";
+import { useSelector } from "react-redux";
 
 function OrdersTable() {
-  const [refresh, setRefresh] = useState(false);
+  const myAdmin = useSelector((state) => state.admin);
+  const refresh = useSelector((state) => state.refresh);
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -32,6 +35,9 @@ function OrdersTable() {
     const response = await axios({
       method: "get",
       url: `${import.meta.env.VITE_URL_BASE_API}/order`,
+      headers: {
+        Authorization: `Bearer ${myAdmin.token}`,
+      },
     });
     setOrders(response.data);
   };
@@ -74,7 +80,10 @@ function OrdersTable() {
                   <TableCell>
                     <div className="d-flex align-items-center">
                       <p>
-                        {order.buyer.firstname} {order.buyer.lastname}
+                        {order.buyer
+                          ? order.buyer.firstname
+                          : "Buyer not found"}
+                        {order.buyer && order.buyer.lastname}
                       </p>
                     </div>
                   </TableCell>
@@ -94,22 +103,13 @@ function OrdersTable() {
                   </TableCell>
                   <TableCell>
                     <div className="d-flex align-items-center">
-                      <p>{order.totalValue}</p>
+                      <p>${order.totalValue}</p>
                     </div>
                   </TableCell>
                   <TableCell>
                     <div className="d-flex flex-nowrap">
-                      <OrderEditModal
-                        setRefresh={setRefresh}
-                        refresh={refresh}
-                        order={order}
-                      />
-                      <DeleteButton
-                        what="order"
-                        id={order._id}
-                        setRefresh={setRefresh}
-                        refresh={refresh}
-                      />
+                      <OrderEditModal order={order} />
+                      <DeleteButton what="order" id={order._id} />
                     </div>
                   </TableCell>
                 </TableRow>

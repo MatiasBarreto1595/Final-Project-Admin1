@@ -1,14 +1,17 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useInput from "../hooks/useInput";
 import { FaPlus } from "react-icons/fa6";
+import { setRefresh } from "../redux/refresSlice";
 
-function ProductCreateModal({ setRefresh, refresh }) {
+function ProductCreateModal() {
+  const dispatch = useDispatch();
+  const refresh = useSelector((state) => state.refresh);
+
   const myAdmin = useSelector((state) => state.admin);
-  const categories = useSelector((state) => state.category);
   const formData = new FormData();
 
   const [show, setShow] = useState(false);
@@ -22,6 +25,19 @@ function ProductCreateModal({ setRefresh, refresh }) {
   const stock = useInput("");
   const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
+  const [categories, setCategories] = useState([]);
+
+  const getCategories = async () => {
+    const response = await axios({
+      method: "get",
+      url: `${import.meta.env.VITE_URL_BASE_API}/category`,
+    });
+    setCategories(response.data);
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
 
   const handleFileChange = (event) => {
     setImage(event.target.files[0]);
@@ -44,7 +60,7 @@ function ProductCreateModal({ setRefresh, refresh }) {
         Authorization: `Bearer ${myAdmin.token}`,
       },
     });
-    setRefresh(!refresh);
+    dispatch(setRefresh(!refresh));
   };
 
   return (

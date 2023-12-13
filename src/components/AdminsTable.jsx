@@ -15,8 +15,8 @@ import AdminEditModal from "./AdminEditModal";
 import "ldrs/ring";
 
 function AdminsTable() {
+  const refresh = useSelector((state) => state.refresh);
   const myAdmin = useSelector((state) => state.admin);
-  const [refresh, setRefresh] = useState(false);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -93,17 +93,8 @@ function AdminsTable() {
                   </TableCell>
                   <TableCell>
                     <div className="d-flex flex-nowrap">
-                      <AdminEditModal
-                        setRefresh={setRefresh}
-                        refresh={refresh}
-                        admin={admin}
-                      />
-                      <DeleteButton
-                        what="admin"
-                        id={admin._id}
-                        setRefresh={setRefresh}
-                        refresh={refresh}
-                      />
+                      <AdminEditModal admin={admin} />
+                      <DeleteButton what="admin" id={admin._id} />
                     </div>
                   </TableCell>
                 </TableRow>

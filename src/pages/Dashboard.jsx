@@ -17,6 +17,9 @@ function Dashboard() {
     const response = await axios({
       method: "get",
       url: `${import.meta.env.VITE_URL_BASE_API}/order`,
+      headers: {
+        Authorization: `Bearer ${myAdmin.token}`,
+      },
     });
     response.data.forEach((order) => {
       totalValueOrders += order.totalValue;

@@ -3,14 +3,17 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FaPenToSquare } from "react-icons/fa6";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setRefresh } from "../redux/refresSlice";
 
-function ProductEditModal({ product, setRefresh, refresh }) {
+function ProductEditModal({ product }) {
+  const dispatch = useDispatch();
+  const refresh = useSelector((state) => state.refresh);
   const myAdmin = useSelector((state) => state.admin);
+
   const originalImages = product.image;
 
   const [allCategories, setAllCategories] = useState([]);
-
   const getCategories = async () => {
     const response = await axios({
       method: "get",
@@ -58,7 +61,7 @@ function ProductEditModal({ product, setRefresh, refresh }) {
       },
       data: formData,
     });
-    setRefresh(!refresh);
+    dispatch(setRefresh(!refresh));
   };
 
   return (

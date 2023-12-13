@@ -4,11 +4,9 @@ import CategoriesTable from "../components/CategoriesTable";
 import { useSelector } from "react-redux";
 import NotLoguedIn from "./NotLoguedIn";
 import CategoryCreateModal from "../components/CategoryCreateModal";
-import { useState } from "react";
 
 function Categories() {
   const admin = useSelector((state) => state.admin);
-  const [refresh, setRefresh] = useState(false);
 
   return admin ? (
     <>
@@ -18,7 +16,7 @@ function Categories() {
         <div className="main p-3">
           <div className="d-flex flex-nowrap justify-content-between align-items-center">
             <h1 className="title-dashboard">Categories</h1>
-            <CategoryCreateModal refresh={refresh} setRefresh={setRefresh} />
+            <CategoryCreateModal />
           </div>
           <CategoriesTable />
         </div>

@@ -3,10 +3,13 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FaPenToSquare } from "react-icons/fa6";
-import { useSelector } from "react-redux";
-// import useInput from "../hooks/useInput";
+import { useDispatch, useSelector } from "react-redux";
+import { setRefresh } from "../redux/refresSlice";
 
-function CategoriesEditModal({ category, setRefresh, refresh }) {
+function CategoriesEditModal({ category }) {
+  const refresh = useSelector((state) => state.refresh);
+  const dispatch = useDispatch();
+
   const myAdmin = useSelector((state) => state.admin);
   const formData = new FormData();
 
@@ -16,7 +19,7 @@ function CategoriesEditModal({ category, setRefresh, refresh }) {
 
   const [nameInput, setNameInput] = useState(category.name);
   const [imageSrc, setImageSrc] = useState(
-    `${import.meta.env.VITE_URL_BASE_API}/images/${category.image}`
+    `${import.meta.env.VITE_URL_BASE_API}/img/${category.image}`
   );
 
   const [imageFile, setImageFile] = useState("");
@@ -40,7 +43,7 @@ function CategoriesEditModal({ category, setRefresh, refresh }) {
       },
       data: formData,
     });
-    setRefresh(!refresh);
+    dispatch(setRefresh(!refresh));
   };
 
   return (

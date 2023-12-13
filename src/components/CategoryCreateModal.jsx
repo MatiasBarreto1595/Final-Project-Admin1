@@ -2,11 +2,15 @@ import axios from "axios";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useInput from "../hooks/useInput";
 import { FaPlus } from "react-icons/fa6";
+import { setRefresh } from "../redux/refresSlice";
 
-function CategoryCreateModal({ setRefresh, refresh }) {
+function CategoryCreateModal() {
+  const refresh = useSelector((state) => state.refresh);
+  const dispatch = useDispatch();
+
   const myAdmin = useSelector((state) => state.admin);
   const formData = new FormData();
 
@@ -33,7 +37,8 @@ function CategoryCreateModal({ setRefresh, refresh }) {
         Authorization: `Bearer ${myAdmin.token}`,
       },
     });
-    setRefresh(!refresh);
+    dispatch(setRefresh(!refresh));
+    console.log(refresh);
   };
 
   return (

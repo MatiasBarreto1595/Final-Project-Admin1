@@ -3,9 +3,12 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FaPenToSquare } from "react-icons/fa6";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setRefresh } from "../redux/refresSlice";
 
-function AdminEditModal({ admin, setRefresh, refresh }) {
+function AdminEditModal({ admin }) {
+  const dispatch = useDispatch();
+  const refresh = useSelector((state) => state.refresh);
   const myAdmin = useSelector((state) => state.admin);
 
   const [show, setShow] = useState(false);
@@ -31,7 +34,7 @@ function AdminEditModal({ admin, setRefresh, refresh }) {
         email: emailInput && e.target.email.value,
       },
     });
-    setRefresh(!refresh);
+    dispatch(setRefresh(!refresh));
   };
 
   return (

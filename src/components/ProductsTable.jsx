@@ -12,9 +12,11 @@ import TablePagination from "@mui/material/TablePagination";
 import DeleteButton from "./DeleteButton";
 import ProductEditModal from "./ProductEditModal";
 import "ldrs/ring";
+import { useSelector } from "react-redux";
 
 function ProductsTable() {
-  const [refresh, setRefresh] = useState(false);
+  const refresh = useSelector((state) => state.refresh);
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -121,7 +123,9 @@ function ProductsTable() {
                   </TableCell>
                   <TableCell>
                     <div className="d-flex align-items-center">
-                      {product.category.name}
+                      {product.category
+                        ? product.category.name
+                        : "Uncategorized product"}
                     </div>
                   </TableCell>
                   <TableCell>
@@ -136,17 +140,8 @@ function ProductsTable() {
                   </TableCell>
                   <TableCell>
                     <div className="d-flex flex-nowrap">
-                      <ProductEditModal
-                        setRefresh={setRefresh}
-                        refresh={refresh}
-                        product={product}
-                      />
-                      <DeleteButton
-                        what="product"
-                        id={product._id}
-                        setRefresh={setRefresh}
-                        refresh={refresh}
-                      />
+                      <ProductEditModal product={product} />
+                      <DeleteButton what="product" id={product._id} />
                     </div>
                   </TableCell>
                 </TableRow>

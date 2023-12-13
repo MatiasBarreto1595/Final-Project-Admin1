@@ -15,8 +15,8 @@ import UserEditModal from "./UserEditModal";
 import "ldrs/ring";
 
 function UsersTable() {
+  const refresh = useSelector((state) => state.refresh);
   const myAdmin = useSelector((state) => state.admin);
-  const [refresh, setRefresh] = useState(false);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -113,17 +113,8 @@ function UsersTable() {
                   </TableCell>
                   <TableCell>
                     <div className="d-flex flex-nowrap">
-                      <UserEditModal
-                        setRefresh={setRefresh}
-                        refresh={refresh}
-                        user={user}
-                      />
-                      <DeleteButton
-                        what="buyer"
-                        id={user._id}
-                        setRefresh={setRefresh}
-                        refresh={refresh}
-                      />
+                      <UserEditModal user={user} />
+                      <DeleteButton what="buyer" id={user._id} />
                     </div>
                   </TableCell>
                 </TableRow>
