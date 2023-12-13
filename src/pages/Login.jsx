@@ -11,6 +11,8 @@ function Login() {
   const [wrongCredentials, setWrongCredentials] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const[email, setEmail]= useState("");
+  const[password, setPassword]= useState("");
 
   const adminLogIn = async (e) => {
     const response = await axios({
@@ -32,6 +34,11 @@ function Login() {
         setWrongCredentials(true);
       }
     }
+  };
+
+  const handleAutocomplete = () => {
+    setEmail("admin@admin.admin");
+    setPassword("1234");
   };
 
   const handeSubmitLogin = (e) => {
@@ -65,6 +72,8 @@ function Login() {
                 className="form-control"
                 required
                 autoComplete="on"
+                value={email}
+                onChange={(e)=>setEmail(e.target.value)}
               />
               <input
                 type="password"
@@ -73,6 +82,8 @@ function Login() {
                 className="form-control"
                 required
                 autoComplete="on"
+                value={password}
+                onChange={(e)=>setPassword(e.target.value)}
               />
             </div>
             {wrongCredentials && (
@@ -80,6 +91,9 @@ function Login() {
                 Wrong email or password
               </small>
             )}
+             <button type="button" onClick={handleAutocomplete} className={LoginStyle.registerBtn}>
+              <span>Autocomplete</span>
+            </button>
             <button type="submit" className={LoginStyle.registerBtn}>
               <span>Log in</span>
             </button>
