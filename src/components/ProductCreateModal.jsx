@@ -26,7 +26,7 @@ function ProductCreateModal() {
   const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
-
+  const [bestSellerInput, setBestSellerInput] = useState(`false`);
   const getCategories = async () => {
     const response = await axios({
       method: "get",
@@ -52,6 +52,8 @@ function ProductCreateModal() {
     formData.append("stock", stock.value);
     formData.append("image", image);
     formData.append("category", category);
+    formData.append("bestSeller", e.target.bestSeller.value);
+
     await axios({
       method: "post",
       url: `${import.meta.env.VITE_URL_BASE_API}/product/`,
@@ -117,6 +119,20 @@ function ProductCreateModal() {
                 id="image"
                 onChange={handleFileChange}
               />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="bestSeller" className="form-label fs-6">
+                Best seller:
+              </label>
+              <select
+                className="form-select"
+                onChange={(e) => setBestSellerInput(e.target.value)}
+                name="bestSeller"
+                id="bestSeller"
+              >
+                <option value={false}>false</option>
+                <option value={true}>true</option>
+              </select>
             </div>
 
             <div className="mb-1">
