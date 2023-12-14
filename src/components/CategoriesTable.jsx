@@ -94,7 +94,7 @@ export default function CategoriesTable() {
                     <div className="d-flex align-items-center">
                       <img
                         style={{ height: "5rem" }}
-                        src={`${import.meta.env.VITE_URL_BASE_API}/img/${
+                        src={`${import.meta.env.VITE_URL_SUPABASE_IMG}/${
                           category.image
                         }`}
                         alt=""
