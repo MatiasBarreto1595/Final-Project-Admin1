@@ -22,7 +22,7 @@ function NavBar() {
       style={{ fontFamily: "woolwich-regular", height: "4rem" }}
     >
       <Container fluid className="d-flex">
-        <Navbar.Brand href="http://localhost:5173/">
+        <Navbar.Brand href="https://juiceshop-ha.vercel.app/">
           <h1
             style={{
               color: "#3a913f",
