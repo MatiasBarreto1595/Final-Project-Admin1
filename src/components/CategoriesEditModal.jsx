@@ -19,7 +19,7 @@ function CategoriesEditModal({ category }) {
 
   const [nameInput, setNameInput] = useState(category.name);
   const [imageSrc, setImageSrc] = useState(
-    `${import.meta.env.VITE_URL_BASE_API}/img/${category.image}`
+    `${import.meta.env.VITE_URL_SUPABASE_IMG}/${category.image}`
   );
 
   const [imageFile, setImageFile] = useState("");
