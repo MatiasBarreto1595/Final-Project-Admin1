@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../redux/adminSlice";
 
-function NavBar() {
+function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -58,4 +58,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default Navbar;
