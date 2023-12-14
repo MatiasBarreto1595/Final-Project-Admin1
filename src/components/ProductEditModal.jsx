@@ -146,7 +146,7 @@ function ProductEditModal({ product }) {
                       src={
                         img.includes("http")
                           ? `${img}`
-                          : `${import.meta.env.VITE_URL_BASE_API}/img/${img}`
+                          : `${import.meta.env.VITE_URL_SUPABASE_IMG}/${img}`
                       }
                       id={`img_${index}`}
                     />
