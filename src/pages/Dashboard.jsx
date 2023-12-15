@@ -11,6 +11,14 @@ function Dashboard() {
   const navigate = useNavigate();
   const myAdmin = useSelector((state) => state.admin);
 
+  useEffect(() => {
+    !myAdmin && navigate("/login");
+    getOrders();
+    getUsers();
+    getProducts();
+    getAdmins();
+  }, []);
+
   const [valueOrders, setValueOrders] = useState(0);
   const getOrders = async () => {
     let totalValueOrders = 0;
@@ -59,14 +67,6 @@ function Dashboard() {
     });
     setAdmins(response.data);
   };
-
-  useEffect(() => {
-    !myAdmin && navigate("/login");
-    getOrders();
-    getUsers();
-    getProducts();
-    getAdmins();
-  }, []);
 
   return (
     myAdmin && (
